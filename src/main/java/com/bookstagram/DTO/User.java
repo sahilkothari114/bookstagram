@@ -1,5 +1,6 @@
 package com.bookstagram.DTO;
 
+import com.google.gson.annotations.SerializedName;
 import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import org.hibernate.annotations.NaturalId;
 
 @Entity
 @Table(name="\"user\"")
@@ -16,7 +18,9 @@ public class User {
 	@Column
 	private int userId;
 	@Column
+        @SerializedName("username") 
 	private String userName;
+        @NaturalId
 	@Column
 	private String email;
 	@Column

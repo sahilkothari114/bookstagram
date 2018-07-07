@@ -8,7 +8,7 @@
 </head>
 <body>
 <h2>hello</h2>
-<a href="/Bookstagram/bookstagram view/winkle/profile/login.html">click here
+<a href="/Bookstagram/bookstagram view/winkle/profile/login.jsp">click here
 </a>
 </body>
 </html>

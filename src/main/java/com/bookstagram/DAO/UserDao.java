@@ -5,7 +5,7 @@ import java.util.List;
 import com.bookstagram.DTO.User;
 import com.bookstagram.util.HibernateUtil;
 
-public class UserDao extends HibernateUtil implements DAOInterface<User, String> {
+public class UserDao extends HibernateUtil implements DAOInterface<User, Integer> {
 
 	public UserDao() {
 		super();
@@ -23,10 +23,17 @@ public class UserDao extends HibernateUtil implements DAOInterface<User, String>
 		
 	}
 
-	@Override
-	public User findById(String id) {
-		// TODO Auto-generated method stub
-		return null;
+    /**
+     *
+     * @param id
+     * @return
+     */
+    @Override
+	public User findById(Integer id) {
+            
+		
+                User user = getCurrentSession().find(User.class, id);
+		return user;
 	}
 
 	@Override
@@ -43,8 +50,12 @@ public class UserDao extends HibernateUtil implements DAOInterface<User, String>
 
 	@Override
 	public void deleteAll() {
-		// TODO Auto-generated method stub
 		
+	}
+        
+	public User findByEmail(String email) {
+                User user = getCurrentSession().bySimpleNaturalId(User.class).load(email);
+		return user;
 	}
 
 }
