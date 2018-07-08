@@ -18,13 +18,14 @@ public class UserService {
     private static UserDao userDao;
 
     public UserService() {
-        userDao = new UserDao();
+//        userDao = new UserDao();
     }
     
     public User getUserById(Integer Id){
-        userDao.openCurrentSessionWithTransaction();
-        User user = userDao.findById(Id);
-        userDao.closeCurrentSessionWithTransaction();
-        return user;
+        return null;
+//        userDao.openCurrentSessionWithTransaction();
+//        User user = userDao.findById(Id);
+//        userDao.closeCurrentSessionWithTransaction();
+//        return user;
     }
 }

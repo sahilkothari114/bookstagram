@@ -19,19 +19,19 @@ public class LoginService {
     private static UserDao userDao;
     
     public LoginService(){
-        userDao = new UserDao();
+//        userDao = new UserDao();
     }
     public User login(User user) throws NoSuchAlgorithmException, InvalidKeySpecException{
-        userDao.openCurrentSessionWithTransaction();
-        User userDb = userDao.findByEmail(user.getEmail());
-        userDao.closeCurrentSessionWithTransaction();
-        if(userDb!=null){
-            System.out.println("User Found");
-            if(PasswordHash.validatePassword(user.getPassword(), userDb.getPassword())){
-                System.out.println("validation successful");
-                return userDb;
-            }
-        }
+//        userDao.openCurrentSessionWithTransaction();
+//        User userDb = userDao.findByEmail(user.getEmail());
+//        userDao.closeCurrentSessionWithTransaction();
+//        if(userDb!=null){
+//            System.out.println("User Found");
+//            if(PasswordHash.validatePassword(user.getPassword(), userDb.getPassword())){
+//                System.out.println("validation successful");
+//                return userDb;
+//            }
+//        }
         return null;
         
     }

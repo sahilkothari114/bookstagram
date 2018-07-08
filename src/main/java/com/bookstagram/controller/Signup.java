@@ -28,7 +28,7 @@ import java.util.logging.Logger;
 public class Signup extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
-    
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SecurityException {
         //response.setContentType("application/json");
@@ -39,24 +39,23 @@ public class Signup extends HttpServlet {
 		user.setEmail(request.getParameter("email"));*/
         String jsonString = IOUtils.toString(request.getInputStream(), BookstagramConstant.CHARACTER_ENCODING);
         //String jsonString ="{userName:'sahil',password:'123',email:'sahil@123'}";
-        //System.out.println(request.getContentType());
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         //String json = gson.toJson(jsonString);
-        
+
         System.out.println(jsonString + " response");
         User user = gson.fromJson(jsonString, User.class);
-        
+
         try {
             user.setPassword(PasswordHash.createHash(user.getPassword()));
         } catch (NoSuchAlgorithmException | InvalidKeySpecException ex) {
             Logger.getLogger(Signup.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         SignupService signupService = new SignupService();
         signupService.SignUp(user);
-        
-        request.getSession(true).setAttribute("loggedInUser", user.getUserId());
-        System.out.println("session - "+ request.getSession(true).getAttribute("loggedInUser"));
+
+        request.getSession(true).setAttribute("loggedInUser", user.getEmail());
+        System.out.println("session - " + request.getSession(true).getAttribute("loggedInUser"));
         //request.setAttribute("userId", "Sahil");
         response.setContentType("text/html;charset=UTF-8");
         response.getWriter().write("True");
@@ -64,5 +63,5 @@ public class Signup extends HttpServlet {
         //RequestDispatcher rd = request.getRequestDispatcher("index2.jsp");
         //rd.forward(request, response);  
     }
-    
+
 }
