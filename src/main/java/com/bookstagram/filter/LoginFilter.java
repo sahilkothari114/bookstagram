@@ -25,7 +25,8 @@ import javax.servlet.http.HttpSession;
  * @author sahil
  */
 @WebFilter(
-        urlPatterns = "/bookstagram view/winkle/profile/Index",
+        urlPatterns = {"/bookstagram%20view/winkle/profile/Index",
+             },
         filterName = "LoginFilter"
 )
 public class LoginFilter implements Filter {

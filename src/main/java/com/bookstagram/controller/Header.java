@@ -6,30 +6,53 @@
 package com.bookstagram.controller;
 
 import com.bookstagram.DTO.User;
-import com.bookstagram.service.LoginService;
-import com.bookstagram.util.BookstagramConstant;
-
+import com.bookstagram.service.UserService;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.commons.io.IOUtils;
+import org.bson.types.ObjectId;
 
 /**
  *
  * @author sahil
  */
-@WebServlet("/bookstagram%20view/winkle/profile/Signin")
-public class Login extends HttpServlet {
+@WebServlet("/bookstagram%20view/winkle/profile/newjsp.jsp")
+public class Header extends HttpServlet {
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    private UserService us = new UserService();
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        if (request.getSession().getAttribute("loggedInUser") != null) {
+
+            System.out.println("in Header controller - " + request.getSession().getAttribute("loggedInUser"));
+            User user = us.getUserById((ObjectId) request.getSession().getAttribute("loggedInUser"));
+            Gson gson = new Gson();
+            user.setPassword(null);
+            String jsonString = gson.toJson(user);
+            System.out.println("jsonString = " + jsonString);
+            request.setAttribute("user", jsonString);
+
+            //String jsonStringreq = IOUtils.toString(request.getInputStream(), BookstagramConstant.CHARACTER_ENCODING);
+            System.out.println(request.getAttribute("user"));
+            RequestDispatcher dispatcher = request.getRequestDispatcher("header.jsp");
+            dispatcher.include(request, response);
+        }
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -43,7 +66,7 @@ public class Login extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        processRequest(request, response);
     }
 
     /**
@@ -57,35 +80,7 @@ public class Login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            System.out.println("------Signin controller called-----");
-
-            response.setContentType("text/plain");
-            PrintWriter out = response.getWriter();
-
-            String jsonString = IOUtils.toString(request.getInputStream(),
-                    BookstagramConstant.CHARACTER_ENCODING);
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            //String json = gson.toJson(jsonString);
-
-            System.out.println(jsonString + " response");
-            User user = gson.fromJson(jsonString, User.class);
-            LoginService loginService = new LoginService();
-            User loggedInUser = loginService.login(user);
-            if (loggedInUser != null) {
-                System.out.println("user name" + loggedInUser.getUserName());
-                request.getSession(true).setAttribute("loggedInUser", loggedInUser.getUserId());
-                System.out.println("session - " + request.getSession(true).getAttribute("loggedInUser"));
-                out.write("True");
-            } else {
-
-                response.setStatus(400);
-                out.print("Login Unsuccessful!");
-
-            }
-        } catch (NoSuchAlgorithmException | InvalidKeySpecException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**

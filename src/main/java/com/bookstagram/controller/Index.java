@@ -5,12 +5,7 @@
  */
 package com.bookstagram.controller;
 
-import com.bookstagram.DTO.User;
 import com.bookstagram.service.UserService;
-import com.bookstagram.util.BookstagramConstant;
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -18,14 +13,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.commons.io.IOUtils;
-
 
 /**
  *
  * @author sahil
  */
-@WebServlet("/bookstagram%20view/winkle/profile/Index")
+@WebServlet( urlPatterns="/bookstagram%20view/winkle/profile/Index", loadOnStartup=1)
 public class Index extends HttpServlet {
 
     /**
@@ -38,41 +31,34 @@ public class Index extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     private UserService us = new UserService();
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        if(request.getSession().getAttribute("loggedInUser")!=null){
-            
-        
-        User user = us.getUserById((Integer) request.getSession().getAttribute("loggedInUser"));
-        Gson gson = new Gson();
-        user.setPassword(null);
-        String jsonString = gson.toJson(user).toString();
-        System.out.println("jsonString = "+jsonString);
-        request.setAttribute("user", jsonString);
-        
-        //String jsonStringreq = IOUtils.toString(request.getInputStream(), BookstagramConstant.CHARACTER_ENCODING);
-        System.out.println(request.getAttribute("user"));
+        if (request.getSession().getAttribute("loggedInUser") != null) {
+
+            System.out.println("in Index controller - " + request.getSession().getAttribute("loggedInUser"));
+//            User user = us.getUserById((ObjectId) request.getSession().getAttribute("loggedInUser"));
+//            Gson gson = new Gson();
+//            user.setPassword(null);
+//            String jsonString = gson.toJson(user);
+//            System.out.println("jsonString = " + jsonString);
+//            request.setAttribute("user", jsonString);
+//
+//            //String jsonStringreq = IOUtils.toString(request.getInputStream(), BookstagramConstant.CHARACTER_ENCODING);
+//            System.out.println(request.getAttribute("user"));
+            RequestDispatcher dispatcher = request.getRequestDispatcher("index2.jsp");
+            dispatcher.forward(request, response);
         }
-        RequestDispatcher dispatcher = request.getRequestDispatcher("index2.jsp");
-        dispatcher.forward(request, response);
+
         //response.setContentType("text/html;charset=UTF-8");
-        
+
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        
+
     }
 
     /**

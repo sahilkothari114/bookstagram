@@ -31,7 +31,7 @@
                     // send ajax
 
                     var data = $(signupForm).serializeArray();
-                    var url = "index2.jsp";
+                    var url = "Index";
                     $.ajax({
                         url: 'sign-up', // url where to submit the request
                         type: "POST", // type of action POST || GET
@@ -46,11 +46,9 @@
                             } else {
                                 alert('Unable to sign you up.');
                             }
-                            
                         },
                         error: function () {
                             console.log("error");
-                            
                         }
                         //data :JSON.stringify( {userName:'sahil',password:'123',email:'sahil@123'} )
                     });

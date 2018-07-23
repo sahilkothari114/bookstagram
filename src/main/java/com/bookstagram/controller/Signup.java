@@ -33,10 +33,7 @@ public class Signup extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SecurityException {
         //response.setContentType("application/json");
 
-        /*		User user = new User();
-		user.setUserName(request.getParameter("username"));
-		user.setPassword(request.getParameter("password"));
-		user.setEmail(request.getParameter("email"));*/
+
         String jsonString = IOUtils.toString(request.getInputStream(), BookstagramConstant.CHARACTER_ENCODING);
         //String jsonString ="{userName:'sahil',password:'123',email:'sahil@123'}";
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -44,7 +41,7 @@ public class Signup extends HttpServlet {
 
         System.out.println(jsonString + " response");
         User user = gson.fromJson(jsonString, User.class);
-
+        System.out.println("user name -"+user.getUserName());
         try {
             user.setPassword(PasswordHash.createHash(user.getPassword()));
         } catch (NoSuchAlgorithmException | InvalidKeySpecException ex) {
@@ -54,8 +51,9 @@ public class Signup extends HttpServlet {
         SignupService signupService = new SignupService();
         signupService.SignUp(user);
 
-        request.getSession(true).setAttribute("loggedInUser", user.getEmail());
+        request.getSession(true).setAttribute("loggedInUser", user.getUserId());
         System.out.println("session - " + request.getSession(true).getAttribute("loggedInUser"));
+        
         //request.setAttribute("userId", "Sahil");
         response.setContentType("text/html;charset=UTF-8");
         response.getWriter().write("True");

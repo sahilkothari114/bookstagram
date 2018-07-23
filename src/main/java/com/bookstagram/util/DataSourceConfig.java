@@ -9,7 +9,6 @@ import com.bookstagram.DTO.Entity;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
 import com.mongodb.MongoClient;
-import com.bookstagram.util.BookstagramConstant;
 
 public class DataSourceConfig {
 	
@@ -20,7 +19,8 @@ public class DataSourceConfig {
 		return morphia;
 	}
         
-	public Datastore datastore(MongoClient mongoClient) {
+	public Datastore datastore() {
+                MongoClient mongoClient = MongoDBUtil.CreateInstance().client;
 		final Datastore datastore = morphia().createDatastore(mongoClient,BookstagramConstant.DBNAME);
 		datastore.ensureIndexes();
 		return datastore;
