@@ -3,24 +3,8 @@
     Created on : 10 Jul, 2018, 2:06:25 AM
     Author     : sahil
 --%>
-
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-         pageEncoding="ISO-8859-1"
-         import="   com.google.gson.Gson,
-         com.google.gson.JsonParser,
-
-         com.google.gson.JsonObject,
-         com.bookstagram.util.BookstagramConstant,
-         org.apache.commons.io.IOUtils,
-         java.util.*"%>
-        <%
-
-            String userstr = request.getAttribute("user").toString();
-            System.out.println("userStr - " + userstr);
-            JsonObject jsonObject = (new JsonParser()).parse(userstr).getAsJsonObject();
-            String userName = (String) jsonObject.get("username").getAsString();
-            
-        %>
+<%@ taglib prefix="c" 
+           uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html>
@@ -159,7 +143,7 @@
                             <ul class="dropdown-menu user-auth-dropdown" data-dropdown-in="flipInX" data-dropdown-out="flipOutX">
                                 <li>
                                     <!--								<a href="profile.html"><i class="zmdi zmdi-account"></i><span>Profile</span></a>-->
-                                    <a href="profile.html"><i class="zmdi zmdi-account"></i><span><%= userName%></span></a>
+                                    <a href="profile.html"><i class="zmdi zmdi-account"></i><span><c:out value="${user.userName}"/></span></a>
                                 </li>
                                 <li>
                                     <a href="#"><i class="zmdi zmdi-settings"></i><span>Settings</span></a>
@@ -179,15 +163,12 @@
             <!-- Left Sidebar Menu -->
             <div class="fixed-sidebar-left">
                 <ul class="nav navbar-nav side-nav nicescroll-bar">
-                    <li class="navigation-header">
-                        <span>Main</span> 
-                        <hr/>
-                    </li>
+
                     <li>
-                        <a href="javascript:void(0);" data-toggle="collapse" data-target="#ecom_dr"><div class="pull-left"><i class=" ti-book  mr-20"></i><span class="right-nav-text">Libraries</span></div><div class="pull-right"><i class="ti-angle-down"></i></div><div class="clearfix"></div></a>
+                        <a href="javascript:void(0);" data-toggle="collapse" data-target="#ecom_dr"><div class="pull-left"><i class=" ti-book  mr-20"></i><span class="right-nav-text">Shelves</span></div><div class="pull-right"><i class="ti-angle-down"></i></div><div class="clearfix"></div></a>
                         <ul id="ecom_dr" class="collapse collapse-level-1">
                             <li>
-                                <a href="shelf.html">Read</a>
+                                <a href="shelf.jsp">Read</a>
                             </li>
                             <li>
                                 <a href="shelf.html">Curently reading</a>
@@ -196,12 +177,12 @@
                                 <a href="shelf.html">Want to read</a>
                             </li>
                             <li>
-                                <a href="add-shelf.html">Add Library</a>
+                                <a href="AddShelf">Add shelf</a>
                             </li>
                         </ul>
                     </li>
                     <li>
-                        <a  href="add-books.html"><div class="pull-left"><i class=" ti-plus  mr-20"></i><span class="right-nav-text">Add book</span></div><div class="pull-right"></div><div class="clearfix"></div></a>
+                        <a  href="AddBooks"><div class="pull-left"><i class=" ti-plus  mr-20"></i><span class="right-nav-text">Add book</span></div><div class="pull-right"></div><div class="clearfix"></div></a>
                     </li>
                     <li>
                         <a  href="add-products.html"><div class="pull-left"><i class=" ti-receipt mr-20"></i><span class="right-nav-text">Publish</span></div><div class="pull-right"></div><div class="clearfix"></div></a>

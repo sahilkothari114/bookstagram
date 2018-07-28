@@ -13,15 +13,8 @@ import java.util.List;
 
 public class SignupService {
 
-    //private static UserDao userDao;
-
-    //private MongoClient mongoClient = MongoDBUtil.CreateInstance().client;
-    //public Morphia morphia = new Morphia();
     DataSourceConfig ds = new DataSourceConfig();
-    public SignupService() {
-        //morphia.map(User.class);
-        //userDao = new UserDao(User.class, mongoClient, morphia, BookstagramConstant.DBNAME);
-    }
+
 
     public void SignUp(User user) {
         //test code start
@@ -49,9 +42,5 @@ public class SignupService {
         
         UserDao ud = new UserDao(User.class,ds.datastore());
         ud.save(user);
-        
-        System.out.println("saving---------------------");
-        //ds.datastore().save(user);
-
     }
 }

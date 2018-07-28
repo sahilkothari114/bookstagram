@@ -26,7 +26,8 @@ import javax.servlet.http.HttpSession;
  */
 @WebFilter(
         urlPatterns = {"/bookstagram%20view/winkle/profile/Index",
-             },
+                       "/bookstagram%20view/winkle/profile/AddBooks",
+                       "/bookstagram%20view/winkle/profile/AddShelf"},
         filterName = "LoginFilter"
 )
 public class LoginFilter implements Filter {
@@ -111,7 +112,7 @@ public class LoginFilter implements Filter {
         HttpSession session = request.getSession(false);
         if (session == null || session.getAttribute("loggedInUser") == null) {
             System.out.println("empty session");
-            response.sendRedirect(request.getContextPath() + "/bookstagram view/winkle/profile/login.jsp");
+            response.sendRedirect(request.getContextPath() + "/bookstagram view/winkle/profile/Login");
         } else {
             chain.doFilter(request, response);
         }

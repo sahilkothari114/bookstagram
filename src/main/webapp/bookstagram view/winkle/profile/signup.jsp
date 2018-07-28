@@ -86,7 +86,7 @@
                 </div>
                 <div class="form-group mb-0 pull-right">
                     <span class="inline-block pr-10 txt-light-grey">Already have an account?</span>
-                    <a class="inline-block btn btn-warning btn-rounded" href="login.html">Sign In</a>
+                    <a class="inline-block btn btn-warning btn-rounded" href="Login">Sign In</a>
                 </div>
                 <div class="clearfix"></div>
             </header>

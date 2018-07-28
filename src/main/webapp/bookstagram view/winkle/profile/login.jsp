@@ -30,7 +30,7 @@
                 // click on button submit
                 $("#submitButton").on('click', function () {
                     // send ajax
-
+                         
                     var data = $(signinForm).serializeArray();
                     var url = "Index";
                     $.ajax({
@@ -89,7 +89,7 @@
                 </div>
                 <div class="form-group mb-0 pull-right">
                     <span class="inline-block pr-10 txt-light-grey">Don't have an account?</span>
-                    <a class="inline-block btn btn-warning  btn-rounded " href="signup.jsp">Sign Up</a>
+                    <a class="inline-block btn btn-warning  btn-rounded " href="SignUp">Sign Up</a>
                 </div>
                 <div class="clearfix"></div>
             </header>
@@ -119,15 +119,6 @@
                                                     <div class="clearfix"></div>
                                                     <input type="password" class="form-control" required="" id="exampleInputpwd_2" placeholder="Enter password" id="password" name="password">
                                                 </div>
-
-                                                <!--												<div class="form-group">
-                                                                                                                                                        <div class="checkbox checkbox-primary pr-10 pull-left">
-                                                                                                                                                                <input id="checkbox_2" required="" type="checkbox">
-                                                                                                                                                                <label for="checkbox_2"> Keep me logged in</label>
-                                                                                                                                                        </div>
-                                                                                                                                                        <div class="clearfix"></div>
-                                                                                                                                                </div>-->
-
                                             </form>
                                             <div class="form-group text-center">
                                                 <input type="submit" class="btn btn-warning  btn-rounded" value="Sign in" id="submitButton">

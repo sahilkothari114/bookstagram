@@ -58,7 +58,6 @@ public class Login extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            System.out.println("------Signin controller called-----");
 
             response.setContentType("text/plain");
             PrintWriter out = response.getWriter();
@@ -73,9 +72,9 @@ public class Login extends HttpServlet {
             LoginService loginService = new LoginService();
             User loggedInUser = loginService.login(user);
             if (loggedInUser != null) {
-                System.out.println("user name" + loggedInUser.getUserName());
+
                 request.getSession(true).setAttribute("loggedInUser", loggedInUser.getUserId());
-                System.out.println("session - " + request.getSession(true).getAttribute("loggedInUser"));
+
                 out.write("True");
             } else {
 

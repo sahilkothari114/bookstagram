@@ -78,7 +78,7 @@ public class Logout extends HttpServlet {
         //response.setContentType("text/plain");
         //PrintWriter out = response.getWriter();
         //out.write("True");
-        response.sendRedirect(request.getContextPath() + "/bookstagram view/winkle/profile/login.jsp");
+        response.sendRedirect(request.getContextPath() + "/bookstagram view/winkle/profile/Login");
     }
 
     /**

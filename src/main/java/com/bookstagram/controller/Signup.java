@@ -31,17 +31,13 @@ public class Signup extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SecurityException {
-        //response.setContentType("application/json");
-
 
         String jsonString = IOUtils.toString(request.getInputStream(), BookstagramConstant.CHARACTER_ENCODING);
         //String jsonString ="{userName:'sahil',password:'123',email:'sahil@123'}";
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        //String json = gson.toJson(jsonString);
 
-        System.out.println(jsonString + " response");
         User user = gson.fromJson(jsonString, User.class);
-        System.out.println("user name -"+user.getUserName());
+
         try {
             user.setPassword(PasswordHash.createHash(user.getPassword()));
         } catch (NoSuchAlgorithmException | InvalidKeySpecException ex) {
@@ -53,13 +49,9 @@ public class Signup extends HttpServlet {
 
         request.getSession(true).setAttribute("loggedInUser", user.getUserId());
         System.out.println("session - " + request.getSession(true).getAttribute("loggedInUser"));
-        
-        //request.setAttribute("userId", "Sahil");
         response.setContentType("text/html;charset=UTF-8");
         response.getWriter().write("True");
-        //@SuppressWarnings("unused")
-        //RequestDispatcher rd = request.getRequestDispatcher("index2.jsp");
-        //rd.forward(request, response);  
+
     }
 
 }

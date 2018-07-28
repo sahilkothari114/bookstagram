@@ -1,24 +1,35 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.bookstagram.DTO;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.bson.types.ObjectId;
+import org.mongodb.morphia.annotations.Id;
+import org.mongodb.morphia.annotations.Entity;
 
 /**
  *
  * @author sahil
  */
+@Entity
 public class Book {
+
+    @Id
+    private ObjectId bookId;
     private long isbn;
     private String title;
     private String thumbnail;
-    private String Cover;
-    private List<String> authors = new ArrayList<String>();
+    private String cover;
+    private int pageCount;
+    private List<String> authors = new ArrayList<>();
     private String description;
+
+    public int getPageCount() {
+        return pageCount;
+    }
+
+    public void setPageCount(int pageCount) {
+        this.pageCount = pageCount;
+    }
 
     public long getIsbn() {
         return isbn;
@@ -45,11 +56,11 @@ public class Book {
     }
 
     public String getCover() {
-        return Cover;
+        return cover;
     }
 
     public void setCover(String Cover) {
-        this.Cover = Cover;
+        this.cover = Cover;
     }
 
     public List<String> getAuthors() {
@@ -67,6 +78,18 @@ public class Book {
     public void setDescription(String description) {
         this.description = description;
     }
-    
-    
+
+    public ObjectId getBookId() {
+        return bookId;
+    }
+
+    public void setBookId(ObjectId bookId) {
+        this.bookId = bookId;
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" + "isbn=" + isbn + ", title=" + title + ", thumbnail=" + thumbnail + ", Cover=" + cover + ", authors=" + authors + ", description=" + description + '}';
+    }
+
 }

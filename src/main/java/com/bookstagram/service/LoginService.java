@@ -11,7 +11,6 @@ import com.bookstagram.util.DataSourceConfig;
 import com.bookstagram.util.PasswordHash;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
-import org.mongodb.morphia.query.Query;
 
 /**
  *

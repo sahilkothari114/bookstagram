@@ -1,14 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.bookstagram.controller;
 
-import com.bookstagram.DTO.User;
+import com.bookstagram.DTO.Shelf;
+import com.bookstagram.service.ShelfService;
 import com.bookstagram.service.UserService;
-import com.google.gson.Gson;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,37 +18,25 @@ import org.bson.types.ObjectId;
  *
  * @author sahil
  */
-@WebServlet("/bookstagram%20view/winkle/profile/newjsp.jsp")
-public class Header extends HttpServlet {
+@WebServlet("/bookstagram%20view/winkle/profile/addShelf")
+public class AddShelf extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    private UserService us = new UserService();
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        if (request.getSession().getAttribute("loggedInUser") != null) {
+        LOG.info("AddShelf Called");
+        String shelfName = request.getParameter("shelfName");
+        ObjectId userId = (ObjectId) request.getSession(false).getAttribute("loggedInUser");
+        Shelf shelf = new Shelf();
+        shelf.setName(shelfName);
+        shelf.setPersonal(true);
+        UserService us = new UserService();
+        us.addShelfInUser(userId, shelf);
+                     RequestDispatcher rd = request.getRequestDispatcher("Index");
+        rd.forward(request, response);
 
-            System.out.println("in Header controller - " + request.getSession().getAttribute("loggedInUser"));
-            User user = us.getUserById((ObjectId) request.getSession().getAttribute("loggedInUser"));
-            Gson gson = new Gson();
-            user.setPassword(null);
-            String jsonString = gson.toJson(user);
-            System.out.println("jsonString = " + jsonString);
-            request.setAttribute("user", user);
-
-            //String jsonStringreq = IOUtils.toString(request.getInputStream(), BookstagramConstant.CHARACTER_ENCODING);
-            System.out.println(request.getAttribute("user"));
-            RequestDispatcher dispatcher = request.getRequestDispatcher("header.jsp");
-            dispatcher.include(request, response);
-        }
+        
     }
+    private static final Logger LOG = Logger.getLogger(AddShelf.class.getName());
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

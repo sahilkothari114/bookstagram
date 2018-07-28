@@ -1,28 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
     <display-name>Bookstagram</display-name>
-    <!--    <filter>
-        <filter-name>LoginFilter</filter-name>
-        <filter-class>com.bookstagram.filter.LoginFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>LoginFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>-->
-
+    <servlet-mapping>
+        <servlet-name>AddShelf_1</servlet-name>
+        <url-pattern>/AddShelf_1</url-pattern>
+    </servlet-mapping>
     <welcome-file-list>
-        <welcome-file>index.jsp</welcome-file>
+        <welcome-file>Index</welcome-file>
     </welcome-file-list>
-    <!--   <servlet>
-    <servlet-name>Jersey RESTful Application</servlet-name>
-    <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
-    <init-param>
-      <param-name>jersey.config.server.provider.packages</param-name>
-      <param-value>com.bookstagram.service</param-value>
-    </init-param>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>Jersey RESTful Application</servlet-name>
-    <url-pattern>/rest/*</url-pattern>
-  </servlet-mapping> -->
+    <servlet>
+        <servlet-name>AddBooks</servlet-name>
+        <jsp-file>/bookstagram view/winkle/profile/add-books.jsp</jsp-file>
+    </servlet>
+    <servlet>
+        <servlet-name>AddShelf_1</servlet-name>
+        <servlet-class>com.bookstagram.controller.AddShelf</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddBooks</servlet-name>
+        <url-pattern>/bookstagram%20view/winkle/profile/AddBooks</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>Index</servlet-name>
+        <jsp-file>/bookstagram view/winkle/profile/index2.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Index</servlet-name>
+        <url-pattern>/bookstagram%20view/winkle/profile/Index</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>Login</servlet-name>
+        <jsp-file>/bookstagram view/winkle/profile/login.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Login</servlet-name>
+        <url-pattern>/bookstagram%20view/winkle/profile/Login</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>SignUp</servlet-name>
+        <jsp-file>/bookstagram view/winkle/profile/signup.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SignUp</servlet-name>
+        <url-pattern>/bookstagram%20view/winkle/profile/SignUp</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>AddShelf</servlet-name>
+        <jsp-file>/bookstagram view/winkle/profile/add-shelf.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddShelf</servlet-name>
+        <url-pattern>/bookstagram%20view/winkle/profile/AddShelf</url-pattern>
+    </servlet-mapping>
 </web-app>
