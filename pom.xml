@@ -90,12 +90,20 @@
             <artifactId>morphia</artifactId>
             <version>1.0.0-rc0</version>
         </dependency>
-<!--        dependency for google books api-->
+        <!--        dependency for google books api-->
         <dependency>
             <groupId>com.google.apis</groupId>
             <artifactId>google-api-services-books</artifactId>
             <version>v1-rev99-1.23.0</version>
         </dependency>
+        <!--        Dependency for lombok-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.16.16</version>
+            <scope>provided</scope>
+        </dependency>
+
     </dependencies>
     <build>
         <sourceDirectory>src/main/java</sourceDirectory>
